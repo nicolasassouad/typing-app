@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'preact/hooks';
-import { Keyboard } from './components/Keyboard';
+import { Keyboard, KeyboardLayout } from './components/Keyboard';
 import { TypingPractice } from './components/TypingPractice';
 
 const LOREM_IPSUM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.`;
@@ -7,6 +7,8 @@ const LOREM_IPSUM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se
 export function App() {
   const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
   const [isShiftPressed, setIsShiftPressed] = useState(false);
+  const [keyboardLayout, setKeyboardLayout] =
+    useState<KeyboardLayout>('qwerty');
 
   useEffect(() => {
     const normalizeKey = (key: string): string => {
@@ -60,9 +62,31 @@ export function App() {
 
   return (
     <div className="component-main-container">
-      <h1 className="component-text-xxl">Typing App</h1>
+      <div className="app-header">
+        <h1 className="component-text-xxl">Typing App</h1>
+        <div className="layout-selector">
+          <button
+            className={`layout-button ${keyboardLayout === 'qwerty' ? 'active' : ''}`}
+            onClick={() => setKeyboardLayout('qwerty')}
+            type="button"
+          >
+            QWERTY
+          </button>
+          <button
+            className={`layout-button ${keyboardLayout === 'azerty' ? 'active' : ''}`}
+            onClick={() => setKeyboardLayout('azerty')}
+            type="button"
+          >
+            AZERTY
+          </button>
+        </div>
+      </div>
       <TypingPractice text={LOREM_IPSUM} />
-      <Keyboard pressedKeys={pressedKeys} isShiftPressed={isShiftPressed} />
+      <Keyboard
+        pressedKeys={pressedKeys}
+        isShiftPressed={isShiftPressed}
+        layout={keyboardLayout}
+      />
     </div>
   );
 }

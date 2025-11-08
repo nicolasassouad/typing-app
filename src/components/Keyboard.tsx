@@ -1,6 +1,9 @@
+export type KeyboardLayout = 'qwerty' | 'azerty';
+
 interface KeyboardProps {
   pressedKeys: Set<string>;
   isShiftPressed: boolean;
+  layout?: KeyboardLayout;
 }
 
 interface KeyConfig {
@@ -10,7 +13,7 @@ interface KeyConfig {
   className?: string;
 }
 
-const KEYBOARD_LAYOUT: KeyConfig[][] = [
+const QWERTY_LAYOUT: KeyConfig[][] = [
   [
     { label: '`', labelShifted: '~', key: '`' },
     { label: '1', labelShifted: '!', key: '1' },
@@ -81,7 +84,84 @@ const KEYBOARD_LAYOUT: KeyConfig[][] = [
   ],
 ];
 
-export function Keyboard({ pressedKeys, isShiftPressed }: KeyboardProps) {
+const AZERTY_LAYOUT: KeyConfig[][] = [
+  [
+    { label: '²', labelShifted: '~', key: '`' },
+    { label: '&', labelShifted: '1', key: '1' },
+    { label: 'é', labelShifted: '2', key: '2' },
+    { label: '"', labelShifted: '3', key: '3' },
+    { label: "'", labelShifted: '4', key: '4' },
+    { label: '(', labelShifted: '5', key: '5' },
+    { label: '-', labelShifted: '6', key: '6' },
+    { label: 'è', labelShifted: '7', key: '7' },
+    { label: '_', labelShifted: '8', key: '8' },
+    { label: 'ç', labelShifted: '9', key: '9' },
+    { label: 'à', labelShifted: '0', key: '0' },
+    { label: ')', labelShifted: '°', key: '-' },
+    { label: '=', labelShifted: '+', key: '=' },
+    { label: 'Backspace', key: 'backspace', className: 'extra-wide' },
+  ],
+  [
+    { label: 'Tab', key: 'tab', className: 'wide' },
+    { label: 'a', labelShifted: 'A', key: 'a' },
+    { label: 'z', labelShifted: 'Z', key: 'z' },
+    { label: 'e', labelShifted: 'E', key: 'e' },
+    { label: 'r', labelShifted: 'R', key: 'r' },
+    { label: 't', labelShifted: 'T', key: 't' },
+    { label: 'y', labelShifted: 'Y', key: 'y' },
+    { label: 'u', labelShifted: 'U', key: 'u' },
+    { label: 'i', labelShifted: 'I', key: 'i' },
+    { label: 'o', labelShifted: 'O', key: 'o' },
+    { label: 'p', labelShifted: 'P', key: 'p' },
+    { label: '^', labelShifted: '¨', key: '[' },
+    { label: '$', labelShifted: '£', key: ']' },
+    { label: '\\', labelShifted: 'µ', key: '\\', className: 'wide' },
+  ],
+  [
+    { label: 'Caps', key: 'capslock', className: 'wide' },
+    { label: 'q', labelShifted: 'Q', key: 'q' },
+    { label: 's', labelShifted: 'S', key: 's' },
+    { label: 'd', labelShifted: 'D', key: 'd' },
+    { label: 'f', labelShifted: 'F', key: 'f' },
+    { label: 'g', labelShifted: 'G', key: 'g' },
+    { label: 'h', labelShifted: 'H', key: 'h' },
+    { label: 'j', labelShifted: 'J', key: 'j' },
+    { label: 'k', labelShifted: 'K', key: 'k' },
+    { label: 'l', labelShifted: 'L', key: 'l' },
+    { label: 'm', labelShifted: 'M', key: 'm' },
+    { label: 'ù', labelShifted: '%', key: ';' },
+    { label: '*', labelShifted: 'µ', key: "'" },
+    { label: 'Enter', key: 'enter', className: 'extra-wide' },
+  ],
+  [
+    { label: 'Shift', key: 'shift', className: 'extra-wide' },
+    { label: 'w', labelShifted: 'W', key: 'w' },
+    { label: 'x', labelShifted: 'X', key: 'x' },
+    { label: 'c', labelShifted: 'C', key: 'c' },
+    { label: 'v', labelShifted: 'V', key: 'v' },
+    { label: 'b', labelShifted: 'B', key: 'b' },
+    { label: 'n', labelShifted: 'N', key: 'n' },
+    { label: ',', labelShifted: '?', key: ',' },
+    { label: ';', labelShifted: '.', key: '.' },
+    { label: ':', labelShifted: '/', key: '/' },
+    { label: '!', labelShifted: '§', key: '8' },
+    { label: 'Shift', key: 'shift', className: 'extra-wide' },
+  ],
+  [
+    { label: 'Ctrl', key: 'control', className: 'wide' },
+    { label: 'Alt', key: 'alt', className: 'wide' },
+    { label: 'Space', key: ' ', className: 'space' },
+    { label: 'Alt', key: 'alt', className: 'wide' },
+    { label: 'Ctrl', key: 'control', className: 'wide' },
+  ],
+];
+
+export function Keyboard({
+  pressedKeys,
+  isShiftPressed,
+  layout = 'qwerty',
+}: KeyboardProps) {
+  const KEYBOARD_LAYOUT = layout === 'azerty' ? AZERTY_LAYOUT : QWERTY_LAYOUT;
   const isKeyPressed = (key: string): boolean => {
     return pressedKeys.has(key.toLowerCase());
   };
