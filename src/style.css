@@ -285,17 +285,57 @@ code {
   }
 }
 
-/* App header styles */
-.app-header {
+/* Exercise selector styles */
+.exercise-selector {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 16px;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 16px;
+}
+
+.exercise-button {
+  font-family: 'Space Mono', monospace;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 8px 16px;
+  border: 2px solid #000000;
+  border-radius: 8px;
+  background-color: #ffffff;
+  color: #000000;
+  cursor: pointer;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease;
+}
+
+.exercise-button:hover {
+  background-color: #e5e7eb;
+}
+
+.exercise-button.active {
+  background-color: #000000;
+  color: #ffffff;
+}
+
+@media screen and (max-width: 480px) {
+  .exercise-button {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+}
+
+/* Keyboard section styles */
+.keyboard-section {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: flex-start;
+  justify-content: center;
 }
 
 .layout-selector {
   display: flex;
+  flex-direction: column;
   gap: 8px;
 }
 
@@ -324,11 +364,6 @@ code {
 }
 
 @media screen and (max-width: 480px) {
-  .app-header {
-    flex-direction: column;
-    align-items: flex-start;
-  }
-
   .layout-button {
     font-size: 12px;
     padding: 6px 12px;
@@ -395,6 +430,29 @@ code {
   }
 }
 
+.three-key-text {
+  text-align: center;
+  font-size: 48px;
+  letter-spacing: 0.2em;
+  min-height: 100px;
+  max-height: 200px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.next-pattern-inline {
+  color: #9ca3af;
+  margin-left: 0.2em;
+  opacity: 0.7;
+}
+
+.three-key-info {
+  text-align: center;
+  color: #6b7280;
+  margin-top: 8px;
+}
+
 @media screen and (max-width: 480px) {
   .typing-stats {
     gap: 16px;
@@ -405,5 +463,16 @@ code {
     line-height: 1.6;
     min-height: 150px;
     max-height: 300px;
+  }
+
+  .three-key-text {
+    font-size: 32px;
+    letter-spacing: 0.15em;
+    min-height: 80px;
+    max-height: 150px;
+  }
+
+  .next-pattern-inline {
+    margin-left: 0.15em;
   }
 }
