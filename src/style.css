@@ -1,6 +1,6 @@
 body {
   margin: 0px;
-  font-family: "Space Mono", monospace;
+  font-family: 'Space Mono', monospace;
 }
 
 address {
@@ -121,8 +121,8 @@ code {
   padding: 2px 8px;
   color: #000000;
   align-content: center;
-  justify-content: "center";
-  width: "fit-content";
+  justify-content: 'center';
+  width: 'fit-content';
   font-size: 12px;
   line-height: 157%;
   font-weight: 700;
@@ -136,8 +136,8 @@ code {
     padding: 1px 4px;
     color: #000000;
     align-content: center;
-    justify-content: "center";
-    width: "fit-content";
+    justify-content: 'center';
+    width: 'fit-content';
     font-size: 12px;
     font-weight: 700;
   }
@@ -226,14 +226,16 @@ code {
   border-radius: 8px;
   background-color: #ffffff;
   color: #000000;
-  font-family: "Space Mono", monospace;
+  font-family: 'Space Mono', monospace;
   font-size: 14px;
   font-weight: 700;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: background-color 0.1s ease, color 0.1s ease;
+  transition:
+    background-color 0.1s ease,
+    color 0.1s ease;
   user-select: none;
 }
 
@@ -280,5 +282,78 @@ code {
 
   .key.space {
     min-width: 200px;
+  }
+}
+
+/* Typing practice styles */
+.typing-practice-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  width: 100%;
+}
+
+.typing-stats {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+}
+
+.stat-item {
+  display: flex;
+  gap: 8px;
+  align-items: baseline;
+}
+
+.typing-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 18px;
+  line-height: 1.8;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  min-height: 200px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.typed-correct {
+  font-weight: 700;
+  color: #000000;
+}
+
+.typed-error {
+  font-weight: 700;
+  color: #ef4444;
+  background-color: #fee2e2;
+  border-radius: 2px;
+}
+
+.typing-cursor {
+  background-color: #000000;
+  color: #ffffff;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0%,
+  50% {
+    opacity: 1;
+  }
+  51%,
+  100% {
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .typing-stats {
+    gap: 16px;
+  }
+
+  .typing-text {
+    font-size: 16px;
+    line-height: 1.6;
+    min-height: 150px;
+    max-height: 300px;
   }
 }
