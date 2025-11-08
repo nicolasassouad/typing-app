@@ -20,6 +20,7 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
   const [wpm, setWpm] = useState(0);
   const [kpm, setKpm] = useState(0);
   const [totalKeystrokes, setTotalKeystrokes] = useState(0);
+  const [errorCount, setErrorCount] = useState(0);
   const textRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
 
@@ -41,6 +42,7 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
     setWpm(0);
     setKpm(0);
     setTotalKeystrokes(0);
+    setErrorCount(0);
     currentIndexRef.current = 0;
     charactersRef.current = newCharacters;
     startTimeRef.current = null;
@@ -110,6 +112,8 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
         event.preventDefault();
         if (currentIdx > 0) {
           const newIndex = currentIdx - 1;
+          const charToUndo = currentChars[newIndex];
+
           setCharacters((chars) => {
             const updated = [...chars];
             updated[newIndex] = {
@@ -119,6 +123,12 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
             };
             return updated;
           });
+
+          // Decrease error count if we're undoing an error
+          if (charToUndo.typed && !charToUndo.correct) {
+            setErrorCount((prev) => Math.max(0, prev - 1));
+          }
+
           setCurrentIndex(newIndex);
           setTotalKeystrokes((prev) => prev + 1);
         }
@@ -135,6 +145,11 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
         const expectedChar = currentChars[currentIdx].char;
         const typedChar = event.key;
         const isCorrect = typedChar === expectedChar;
+
+        // Increment error count if incorrect
+        if (!isCorrect) {
+          setErrorCount((prev) => prev + 1);
+        }
 
         setCharacters((chars) => {
           const updated = [...chars];
@@ -194,6 +209,10 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
         <div className="stat-item">
           <span className="component-text-s">KPM: </span>
           <strong className="component-text-m">{kpm}</strong>
+        </div>
+        <div className="stat-item">
+          <span className="component-text-s">Errors: </span>
+          <strong className="component-text-m">{errorCount}</strong>
         </div>
       </div>
       <div ref={textRef} className="typing-text component-card">
