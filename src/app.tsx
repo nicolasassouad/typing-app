@@ -6,6 +6,7 @@ const LOREM_IPSUM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Se
 
 export function App() {
   const [pressedKeys, setPressedKeys] = useState<Set<string>>(new Set());
+  const [isShiftPressed, setIsShiftPressed] = useState(false);
 
   useEffect(() => {
     const normalizeKey = (key: string): string => {
@@ -27,6 +28,11 @@ export function App() {
     const handleKeyDown = (event: KeyboardEvent) => {
       const key = normalizeKey(event.key);
       setPressedKeys((prev) => new Set(prev).add(key));
+
+      // Track Shift key state
+      if (event.key === 'Shift') {
+        setIsShiftPressed(true);
+      }
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
@@ -36,6 +42,11 @@ export function App() {
         next.delete(key);
         return next;
       });
+
+      // Track Shift key state
+      if (event.key === 'Shift') {
+        setIsShiftPressed(false);
+      }
     };
 
     window.addEventListener('keydown', handleKeyDown);
@@ -51,7 +62,7 @@ export function App() {
     <div className="component-main-container">
       <h1 className="component-text-xxl">Typing App</h1>
       <TypingPractice text={LOREM_IPSUM} />
-      <Keyboard pressedKeys={pressedKeys} />
+      <Keyboard pressedKeys={pressedKeys} isShiftPressed={isShiftPressed} />
     </div>
   );
 }
