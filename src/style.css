@@ -410,6 +410,25 @@ code {
   overflow-x: auto;
 }
 
+.cli-description {
+  text-align: center;
+  color: #6b7280;
+  margin-bottom: 12px;
+  font-style: italic;
+}
+
+.cli-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 20px;
+  text-align: center;
+  letter-spacing: 0.05em;
+  min-height: 80px;
+  max-height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .typed-correct {
   font-weight: 700;
   color: #000000;
