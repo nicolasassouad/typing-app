@@ -401,6 +401,15 @@ code {
   overflow-y: auto;
 }
 
+.coding-text {
+  font-family: 'Space Mono', monospace;
+  font-size: 16px;
+  line-height: 1.6;
+  white-space: pre;
+  tab-size: 2;
+  overflow-x: auto;
+}
+
 .typed-correct {
   font-weight: 700;
   color: #000000;
