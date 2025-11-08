@@ -66,7 +66,6 @@ export function App() {
 
   return (
     <div className="component-main-container">
-      <h1 className="component-text-xxl">Typing App</h1>
       <div className="exercise-selector">
         <button
           className={`exercise-button ${exerciseType === 'text' ? 'active' : ''}`}

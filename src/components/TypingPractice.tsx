@@ -21,6 +21,8 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
   const [kpm, setKpm] = useState(0);
   const [totalKeystrokes, setTotalKeystrokes] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
+  const [timeRemaining, setTimeRemaining] = useState(120); // 2 minutes in seconds
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const textRef = useRef<HTMLDivElement>(null);
   const cursorRef = useRef<HTMLSpanElement>(null);
 
@@ -28,6 +30,8 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
   const currentIndexRef = useRef(0);
   const charactersRef = useRef<CharacterState[]>(characters);
   const startTimeRef = useRef<number | null>(null);
+  const timeRemainingRef = useRef(120);
+  const isTimerActiveRef = useRef(false);
 
   // Re-initialize when text changes
   useEffect(() => {
@@ -43,10 +47,40 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
     setKpm(0);
     setTotalKeystrokes(0);
     setErrorCount(0);
+    setTimeRemaining(120);
+    setIsTimerActive(false);
     currentIndexRef.current = 0;
     charactersRef.current = newCharacters;
     startTimeRef.current = null;
+    timeRemainingRef.current = 120;
+    isTimerActiveRef.current = false;
   }, [text]);
+
+  // Keep refs in sync with state
+  useEffect(() => {
+    timeRemainingRef.current = timeRemaining;
+  }, [timeRemaining]);
+
+  useEffect(() => {
+    isTimerActiveRef.current = isTimerActive;
+  }, [isTimerActive]);
+
+  // Timer countdown
+  useEffect(() => {
+    if (!isTimerActive || timeRemaining <= 0) return;
+
+    const interval = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          setIsTimerActive(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isTimerActive, timeRemaining]);
 
   // Keep refs in sync with state
   useEffect(() => {
@@ -138,6 +172,13 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
       // Start timer on first keypress
       if (currentStartTime === null && currentIdx === 0) {
         setStartTime(Date.now());
+        setIsTimerActive(true);
+        isTimerActiveRef.current = true;
+      }
+
+      // Stop if timer reached 0
+      if (timeRemainingRef.current <= 0) {
+        return;
       }
 
       // Handle regular character input
@@ -202,6 +243,13 @@ export function TypingPractice({ text, onKeyPress }: TypingPracticeProps) {
   return (
     <div className="typing-practice-container">
       <div className="typing-stats">
+        <div className="stat-item">
+          <span className="component-text-s">Time: </span>
+          <strong className="component-text-m">
+            {Math.floor(timeRemaining / 60)}:
+            {(timeRemaining % 60).toString().padStart(2, '0')}
+          </strong>
+        </div>
         <div className="stat-item">
           <span className="component-text-s">WPM: </span>
           <strong className="component-text-m">{wpm}</strong>

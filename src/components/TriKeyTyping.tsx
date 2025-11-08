@@ -49,6 +49,8 @@ export function TriKeyTyping({ onKeyPress }: TriKeyTypingProps) {
   const [totalKeystrokes, setTotalKeystrokes] = useState(0);
   const [errorCount, setErrorCount] = useState(0);
   const [completedCount, setCompletedCount] = useState(0);
+  const [timeRemaining, setTimeRemaining] = useState(120); // 2 minutes in seconds
+  const [isTimerActive, setIsTimerActive] = useState(false);
   const cursorRef = useRef<HTMLSpanElement>(null);
 
   // Use refs to access latest values in event handler
@@ -56,6 +58,8 @@ export function TriKeyTyping({ onKeyPress }: TriKeyTypingProps) {
   const currentCombinationIndexRef = useRef(0);
   const charactersRef = useRef<CharacterState[]>(characters);
   const startTimeRef = useRef<number | null>(null);
+  const timeRemainingRef = useRef(120);
+  const isTimerActiveRef = useRef(false);
 
   // Keep refs in sync with state
   useEffect(() => {
@@ -74,6 +78,31 @@ export function TriKeyTyping({ onKeyPress }: TriKeyTypingProps) {
     startTimeRef.current = startTime;
   }, [startTime]);
 
+  useEffect(() => {
+    timeRemainingRef.current = timeRemaining;
+  }, [timeRemaining]);
+
+  useEffect(() => {
+    isTimerActiveRef.current = isTimerActive;
+  }, [isTimerActive]);
+
+  // Timer countdown
+  useEffect(() => {
+    if (!isTimerActive || timeRemaining <= 0) return;
+
+    const interval = setInterval(() => {
+      setTimeRemaining((prev) => {
+        if (prev <= 1) {
+          setIsTimerActive(false);
+          return 0;
+        }
+        return prev - 1;
+      });
+    }, 1000);
+
+    return () => clearInterval(interval);
+  }, [isTimerActive, timeRemaining]);
+
   // Initialize or move to next combination
   useEffect(() => {
     const combo = TRI_KEY_COMBINATIONS[currentCombinationIndex];
@@ -86,6 +115,14 @@ export function TriKeyTyping({ onKeyPress }: TriKeyTypingProps) {
     setCurrentIndex(0);
     charactersRef.current = newCharacters;
     currentIndexRef.current = 0;
+
+    // Reset timer on first combination
+    if (currentCombinationIndex === 0) {
+      setTimeRemaining(120);
+      setIsTimerActive(false);
+      timeRemainingRef.current = 120;
+      isTimerActiveRef.current = false;
+    }
   }, [currentCombinationIndex]);
 
   // Scroll cursor into view
@@ -166,6 +203,13 @@ export function TriKeyTyping({ onKeyPress }: TriKeyTypingProps) {
       // Start timer on first keypress
       if (currentStartTime === null && currentIdx === 0) {
         setStartTime(Date.now());
+        setIsTimerActive(true);
+        isTimerActiveRef.current = true;
+      }
+
+      // Stop if timer reached 0
+      if (timeRemainingRef.current <= 0) {
+        return;
       }
 
       // Handle regular character input
@@ -262,6 +306,13 @@ export function TriKeyTyping({ onKeyPress }: TriKeyTypingProps) {
   return (
     <div className="typing-practice-container">
       <div className="typing-stats">
+        <div className="stat-item">
+          <span className="component-text-s">Time: </span>
+          <strong className="component-text-m">
+            {Math.floor(timeRemaining / 60)}:
+            {(timeRemaining % 60).toString().padStart(2, '0')}
+          </strong>
+        </div>
         <div className="stat-item">
           <span className="component-text-s">WPM: </span>
           <strong className="component-text-m">{wpm}</strong>
