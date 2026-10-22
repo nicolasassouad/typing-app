@@ -508,3 +508,14 @@ code {
 .restart-button {
   margin-left: auto;
 }
+
+.text-selector {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+}
+
+.text-select {
+  max-width: 100%;
+}

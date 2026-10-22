@@ -131,7 +131,8 @@ export function TypedText({
       {text.split('').map((char, index) =>
         index === state.index ? (
           <span key={index} ref={cursorRef} className="typing-cursor">
-            {char}
+            {/* a bare line break is invisible, so show where Enter is expected */}
+            {char === '\n' ? '↵\n' : char}
           </span>
         ) : (
           <span key={index} className={STATUS_CLASS[state.statuses[index]]}>
