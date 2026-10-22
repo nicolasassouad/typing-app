@@ -17,24 +17,45 @@ export function App() {
   const [exerciseType, setExerciseType] = useState<ExerciseType>('text');
 
   useEffect(() => {
-    const normalizeKey = (key: string): string => {
-      // Normalize special keys to match keyboard layout
-      const keyMap: Record<string, string> = {
+    // Use the physical key (event.code) so Shift+1 and AZERTY keys map to the
+    // same on-screen key on press and release. Layout keys are QWERTY positions.
+    const normalizeKey = (code: string): string => {
+      const codeMap: Record<string, string> = {
+        Backquote: '`',
+        Minus: '-',
+        Equal: '=',
+        BracketLeft: '[',
+        BracketRight: ']',
+        Backslash: '\\',
+        Semicolon: ';',
+        Quote: "'",
+        Comma: ',',
+        Period: '.',
+        Slash: '/',
+        Space: ' ',
         Backspace: 'backspace',
         Tab: 'tab',
         Enter: 'enter',
-        Shift: 'shift',
-        Control: 'control',
-        Alt: 'alt',
+        ShiftLeft: 'shift',
+        ShiftRight: 'shift',
+        ControlLeft: 'control',
+        ControlRight: 'control',
+        AltLeft: 'alt',
+        AltRight: 'alt',
         CapsLock: 'capslock',
-        ' ': ' ', // Space
       };
 
-      return keyMap[key] || key.toLowerCase();
+      return codeMap[code] ?? code.replace(/^(Key|Digit)/, '').toLowerCase();
+    };
+
+    // Keyup is lost when the window loses focus (Cmd+Tab), so clear everything
+    const handleBlur = () => {
+      setPressedKeys(new Set());
+      setIsShiftPressed(false);
     };
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      const key = normalizeKey(event.key);
+      const key = normalizeKey(event.code);
       setPressedKeys((prev) => new Set(prev).add(key));
 
       // Track Shift key state
@@ -44,7 +65,7 @@ export function App() {
     };
 
     const handleKeyUp = (event: KeyboardEvent) => {
-      const key = normalizeKey(event.key);
+      const key = normalizeKey(event.code);
       setPressedKeys((prev) => {
         const next = new Set(prev);
         next.delete(key);
@@ -59,10 +80,12 @@ export function App() {
 
     window.addEventListener('keydown', handleKeyDown);
     window.addEventListener('keyup', handleKeyUp);
+    window.addEventListener('blur', handleBlur);
 
     return () => {
       window.removeEventListener('keydown', handleKeyDown);
       window.removeEventListener('keyup', handleKeyUp);
+      window.removeEventListener('blur', handleBlur);
     };
   }, []);
 
