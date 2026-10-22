@@ -82,21 +82,22 @@ So long lives this, and this gives life to thee.`,
       text: `We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness. That to secure these rights, Governments are instituted among Men, deriving their just powers from the consent of the governed.`,
     },
   ],
-  fr: [
-    {
-      title: 'Du côté de chez Swann',
-      author: 'Marcel Proust',
-      text: `Longtemps, je me suis couché de bonne heure. Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n'avais pas le temps de me dire : "Je m'endors." Et, une demi-heure après, la pensée qu'il était temps de chercher le sommeil m'éveillait ; je voulais poser le volume que je croyais avoir encore dans les mains et souffler ma lumière.`,
-    },
-    {
-      title: 'Les Misérables',
-      author: 'Victor Hugo',
-      text: `En 1815, M. Charles-François-Bienvenu Myriel était évêque de Digne. C'était un vieillard d'environ soixante-quinze ans ; il occupait le siège de Digne depuis 1806. Quoique ce détail ne touche en aucune manière au fond même de ce que nous avons à raconter, il n'est peut-être pas inutile, ne fût-ce que pour être exact en tout, d'indiquer ici les bruits et les propos qui avaient couru sur son compte au moment où il était arrivé dans le diocèse.`,
-    },
-    {
-      title: "Demain, dès l'aube",
-      author: 'Victor Hugo',
-      text: `Demain, dès l'aube, à l'heure où blanchit la campagne,
+  fr: (
+    [
+      {
+        title: 'Du côté de chez Swann',
+        author: 'Marcel Proust',
+        text: `Longtemps, je me suis couché de bonne heure. Parfois, à peine ma bougie éteinte, mes yeux se fermaient si vite que je n'avais pas le temps de me dire : "Je m'endors." Et, une demi-heure après, la pensée qu'il était temps de chercher le sommeil m'éveillait ; je voulais poser le volume que je croyais avoir encore dans les mains et souffler ma lumière.`,
+      },
+      {
+        title: 'Les Misérables',
+        author: 'Victor Hugo',
+        text: `En 1815, M. Charles-François-Bienvenu Myriel était évêque de Digne. C'était un vieillard d'environ soixante-quinze ans ; il occupait le siège de Digne depuis 1806. Quoique ce détail ne touche en aucune manière au fond même de ce que nous avons à raconter, il n'est peut-être pas inutile, ne fût-ce que pour être exact en tout, d'indiquer ici les bruits et les propos qui avaient couru sur son compte au moment où il était arrivé dans le diocèse.`,
+      },
+      {
+        title: "Demain, dès l'aube",
+        author: 'Victor Hugo',
+        text: `Demain, dès l'aube, à l'heure où blanchit la campagne,
 Je partirai. Vois-tu, je sais que tu m'attends.
 J'irai par la forêt, j'irai par la montagne.
 Je ne puis demeurer loin de toi plus longtemps.
@@ -104,11 +105,11 @@ Je marcherai les yeux fixés sur mes pensées,
 Sans rien voir au dehors, sans entendre aucun bruit,
 Seul, inconnu, le dos courbé, les mains croisées,
 Triste, et le jour pour moi sera comme la nuit.`,
-    },
-    {
-      title: 'Le Corbeau et le Renard',
-      author: 'Jean de La Fontaine',
-      text: `Maître Corbeau, sur un arbre perché,
+      },
+      {
+        title: 'Le Corbeau et le Renard',
+        author: 'Jean de La Fontaine',
+        text: `Maître Corbeau, sur un arbre perché,
 Tenait en son bec un fromage.
 Maître Renard, par l'odeur alléché,
 Lui tint à peu près ce langage :
@@ -117,44 +118,49 @@ Que vous êtes joli ! que vous me semblez beau !
 Sans mentir, si votre ramage
 Se rapporte à votre plumage,
 Vous êtes le Phénix des hôtes de ces bois."`,
-    },
-    {
-      title: "L'Albatros",
-      author: 'Charles Baudelaire',
-      text: `Souvent, pour s'amuser, les hommes d'équipage
+      },
+      {
+        title: "L'Albatros",
+        author: 'Charles Baudelaire',
+        text: `Souvent, pour s'amuser, les hommes d'équipage
 Prennent des albatros, vastes oiseaux des mers,
 Qui suivent, indolents compagnons de voyage,
 Le navire glissant sur les gouffres amers.`,
-    },
-    {
-      title: "Chanson d'automne",
-      author: 'Paul Verlaine',
-      text: `Les sanglots longs
+      },
+      {
+        title: "Chanson d'automne",
+        author: 'Paul Verlaine',
+        text: `Les sanglots longs
 Des violons
 De l'automne
 Blessent mon coeur
 D'une langueur
 Monotone.`,
-    },
-    {
-      title: 'Candide',
-      author: 'Voltaire',
-      text: `Il y avait en Westphalie, dans le château de M. le baron de Thunder-ten-tronckh, un jeune garçon à qui la nature avait donné les moeurs les plus douces. Sa physionomie annonçait son âme. Il avait le jugement assez droit, avec l'esprit le plus simple ; c'est, je crois, pour cette raison qu'on le nommait Candide.`,
-    },
-    {
-      title: 'Du contrat social',
-      author: 'Jean-Jacques Rousseau',
-      text: `L'homme est né libre, et partout il est dans les fers. Tel se croit le maître des autres, qui ne laisse pas d'être plus esclave qu'eux. Comment ce changement s'est-il fait ? Je l'ignore. Qu'est-ce qui peut le rendre légitime ? Je crois pouvoir résoudre cette question.`,
-    },
-    {
-      title: 'Les Trois Mousquetaires',
-      author: 'Alexandre Dumas',
-      text: `Le premier lundi du mois d'avril 1625, le bourg de Meung, où naquit l'auteur du Roman de la Rose, semblait être dans une révolution aussi entière que si les huguenots en fussent venus faire une seconde Rochelle.`,
-    },
-    {
-      title: 'Pensées',
-      author: 'Blaise Pascal',
-      text: `L'homme n'est qu'un roseau, le plus faible de la nature ; mais c'est un roseau pensant. Il ne faut pas que l'univers entier s'arme pour l'écraser : une vapeur, une goutte d'eau, suffit pour le tuer. Mais, quand l'univers l'écraserait, l'homme serait encore plus noble que ce qui le tue, puisqu'il sait qu'il meurt, et l'avantage que l'univers a sur lui ; l'univers n'en sait rien.`,
-    },
-  ],
+      },
+      {
+        title: 'Candide',
+        author: 'Voltaire',
+        text: `Il y avait en Westphalie, dans le château de M. le baron de Thunder-ten-tronckh, un jeune garçon à qui la nature avait donné les moeurs les plus douces. Sa physionomie annonçait son âme. Il avait le jugement assez droit, avec l'esprit le plus simple ; c'est, je crois, pour cette raison qu'on le nommait Candide.`,
+      },
+      {
+        title: 'Du contrat social',
+        author: 'Jean-Jacques Rousseau',
+        text: `L'homme est né libre, et partout il est dans les fers. Tel se croit le maître des autres, qui ne laisse pas d'être plus esclave qu'eux. Comment ce changement s'est-il fait ? Je l'ignore. Qu'est-ce qui peut le rendre légitime ? Je crois pouvoir résoudre cette question.`,
+      },
+      {
+        title: 'Les Trois Mousquetaires',
+        author: 'Alexandre Dumas',
+        text: `Le premier lundi du mois d'avril 1625, le bourg de Meung, où naquit l'auteur du Roman de la Rose, semblait être dans une révolution aussi entière que si les huguenots en fussent venus faire une seconde Rochelle.`,
+      },
+      {
+        title: 'Pensées',
+        author: 'Blaise Pascal',
+        text: `L'homme n'est qu'un roseau, le plus faible de la nature ; mais c'est un roseau pensant. Il ne faut pas que l'univers entier s'arme pour l'écraser : une vapeur, une goutte d'eau, suffit pour le tuer. Mais, quand l'univers l'écraserait, l'homme serait encore plus noble que ce qui le tue, puisqu'il sait qu'il meurt, et l'avantage que l'univers a sur lui ; l'univers n'en sait rien.`,
+      },
+    ] as ClassicText[]
+  ).map((entry) => ({
+    ...entry,
+    // Typed text has no accents (é -> e, ç -> c); titles keep theirs
+    text: entry.text.normalize('NFD').replace(/[̀-ͯ]/g, ''),
+  })),
 };
